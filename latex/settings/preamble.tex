@@ -62,7 +62,12 @@
 %%% NO section numbering in page head
 \renewcommand{\sectionmark}[1]{\markboth{#1}{}}
 \renewcommand{\subsectionmark}[1]{\markright{#1}}
-\newcommand{\solution}{\subsubsection*{Solution}}
+\newcommand{\solution}{
+    \subsubsection*{Solution}
+    \vspace{-5pt}
+    \titlerule[0.4pt]
+    \vspace{10pt}
+}
 
 %%% Headers and footers
 \fancypagestyle{fancy}{
@@ -118,6 +123,13 @@
     {}
     {0.0em}
     {}
+
+%%% NO section numbering
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}
+{}
+{0.0em}
+{}
 
 %%% Spacing before and after sections
 \titlespacing*{\section}{0pt}{12pt}{12pt}
