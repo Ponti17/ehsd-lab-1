@@ -162,6 +162,11 @@ We see that all cases \textit{luckily} only require 2 segments. The lumped eleme
     \label{fig:transmission-line}
 \end{figure}
 
+\subsubsection{Combined Model}
+
+% INSERT COMBINED MODEL HERE
+% REMEMBER PROBE POINTS
+
 \newpage
 
 \subsection{Task 1.2}
@@ -185,11 +190,36 @@ Capacitor $C_{comp}$ is found to be $6.04\,\si{pF}$ (typically) in the IBIS mode
         Broadside stripline     & 1Y4 & 0.11819 & 0.15918 & 1.73153 \\
         \bottomrule[1pt]
     \end{tabular}
-    \caption{Package parameters for the 74ALVC244 buffer (QFN).}
+    \caption{Package parameters for the 74ALVC244 buffer outputs (QFN).}
     \label{tab:pkg-params}
 \end{table}
 
 It is assumed that $R_1 = 10.9\,\si{\Omega}$, even though it varies depending on if it "pulls" up or down.
+
+\subsubsection{Input Buffer Model Parameters}
+
+Capacitor $C_{comp}$ is found to be $4.21\si{pF}$ (typically) in the IBIS model. Package parameters are summarized in Table \ref{tab:pkg-params2}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l l l l}
+        \toprule[1pt]
+        \textbf{Case} & \textbf{Pin} & $R_{pkg}$ [$\si{\ohm}$] & $C_{pkg}$ [$\si{pF}$] & $L_{pkg}$ [$\si{nH}$] \\
+        \midrule
+        Side-by-side microstrip & 1A2 & 0.09598 & 0.13711 & 1.38443 \\
+        Side-by-side stripline  & 1A3 & 0.09315 & 0.12663 & 1.34060 \\
+        Broadside stripline     & 1A4 & 0.10195 & 0.14411 & 1.47927 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Package parameters for the 74ALVC244 buffer inputs (QFN).}
+    \label{tab:pkg-params2}
+\end{table}
+
+\subsubsection{Transmission Line Model Parameters}
+
+
+
+\newpage
 
 \subsection{Task 1.3}
 
