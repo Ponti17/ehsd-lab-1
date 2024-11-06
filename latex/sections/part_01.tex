@@ -4,9 +4,44 @@
 
 \begin{document}
 
-\section{Template 1}
+\section{Part 1 - Modelling and Simulations}
 
-\lipsum[1]
+\subsection{Task 1.1}
+
+Draw the equivalent circuit model to be used tol simulate the crosstalk in each of the 3 cases.
+
+\vspace{10pt}
+The model must include the driver circuit (linear model), package parasitics (simple model), transmission lines, and probe points, and receiver circuit (linear model).
+
+\solution
+
+\subsection{Task 1.2}
+
+Find and estimate the values of the different parameters based on data from the HW test-board, PCB schematic, and the datasheet and IBIS model for the driver/receiver IC. Assume that the aggressor line is matched at the driver end.
+
+\solution
+
+\subsection{Task 1.3}
+
+For each of the transmission lines calculate the equivalent circuit model of the system of the coupled transmission lines. Assume $T_{rise} = 500\,\si{ps}$.
+
+\solution
+
+\subsection{Task 1.4}
+
+From the datasheet - what are the minimum high input and output levels and the maximum low input and output levels. (Assume $V_{CC} = 3.3\,\si{V} \pm 5\%$, and use the same max current load $\pm 12 \,\si{mA}$ for both output low and high).
+
+\solution
+
+\subsection{Task 1.5}
+
+Simulate for each of the transmission line configurations the circuit model (Driver 0-3.3V, $T_{rise} = 500\,\si{ps}$).
+
+\vspace{10pt}
+Document the voltage curves over time, at the driver and receiver ends of the aggressor line, and the near-end (NEXT) and far-end (FEXT) crosstalk at the victim line.
+
+\vspace{10pt}
+Determine the critical crosstalk level in the low state and (high) state. The critical crosstalk level when the line is in a low (high) state is the maximum (minimum) voltage over the victim line due to crosstalk.
 
 \solution
 
