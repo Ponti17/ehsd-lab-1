@@ -8,18 +8,41 @@
   </p>
 </div>
 
-## Long Paths
+## Automated LaTeX Compile
 
-Enable long paths for git by
+A GitHub action is started on every push to main. The action:
 
-```
-git config --system core.longpaths true
-```
+- Starts a docker container with LaTeX
+- Compiles document
+- Uploads pdf as artifact
 
-## Merging
+This means that the newest version of the assignment is always available for download.
 
-**ONLY** fast-forward merging onto _main_ is allowed. This means that if the main branch moves during branch development, rebasing is necessary before merging. 
+### How to Download
 
-No merge commits allowed.
+<div align="center">
+    <img src="media/action1.png" alt="Logo" width=700>
+  </a>
+<h5 aling="center">Go to "Actions"</h5>
+  <p align="center">
+    <br />
+  </p>
+</div>
 
-2 approvals required for PR's for _extreme code review hygge_.
+<div align="center">
+    <img src="media/action2.png" alt="Logo" width=700>
+  </a>
+<h5 aling="center">Click on latest successful action</h5>
+  <p align="center">
+    <br />
+  </p>
+</div>
+
+<div align="center">
+    <img src="media/action3.png" alt="Logo" width=700>
+  </a>
+<h5 aling="center">Download main document artifact</h5>
+  <p align="center">
+    <br />
+  </p>
+</div>

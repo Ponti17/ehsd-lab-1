@@ -24,8 +24,6 @@
 \usepackage{siunitx} % For SI units
 \usepackage{float} % For forcing float positions
 \usepackage{changepage} % To change page layout within the document
-\usepackage[outputdir=./build]{minted}
-\usepackage[skins,minted]{tcolorbox}
 \usepackage{booktabs}
 
 %%% Language and encoding
@@ -153,62 +151,3 @@
 
 %%% Reference all citations
 \nocite{*}
-
-\definecolor{mintedbackground}{rgb}{0.95,0.95,0.95}
-\definecolor{mintedframe}{rgb}{0.3,0.55,0.55}
-
-\setminted[python]{
-    bgcolor=mintedbackground,
-    fontfamily=tt,
-    linenos=true,
-    numberblanklines=true,
-    numbersep=3pt,
-    gobble=0,
-    frame=leftline,
-    framesep=1mm,
-    funcnamehighlighting=true,
-    tabsize=2,
-    obeytabs=false,
-    mathescape=false
-    samepage=false,
-    showspaces=false,
-    texcl=false,
-    baselinestretch=1,
-    fontsize=\scriptsize,
-    breaklines=true,
-}
-
-\setminted[text]{
-    bgcolor=mintedbackground,
-    fontfamily=tt,
-    linenos=true,
-    numberblanklines=true,
-    numbersep=12pt,
-    numbersep=5pt,
-    gobble=0,
-    frame=leftline,
-    framesep=2mm,
-    funcnamehighlighting=true,
-    tabsize=4,
-    obeytabs=false,
-    mathescape=false
-    samepage=false,
-    showspaces=false,
-    showtabs =false,
-    texcl=false,
-    baselinestretch=1.2,
-    fontsize=\footnotesize,
-    breaklines=true,
-}
-
-
-\newtcblisting{myminted}[2][]{listing engine=minted, listing only,#1, title=#2, minted language=python, colback=mintedbackground}
-
-\newtcblisting{mintedterminal}[2][]{enhanced, listing engine=minted, 
-listing only,#1, title=#2, minted language=text, 
-coltitle=mintedbackground!30!black, 
-fonttitle=\ttfamily\footnotesize,
-sharp corners, top=0mm, bottom=0mm,
-title code={\path[draw=mintedframe,dashed, fill=mintedbackground](title.south west)--(title.south east);},
-frame code={\path[draw=mintedframe, fill=mintedbackground](frame.south west) rectangle (frame.north east);}
-}
