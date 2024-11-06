@@ -15,6 +15,45 @@ The model must include the driver circuit (linear model), package parasitics (si
 
 \solution
 
+To model the driver, receiver and all package parasitics we will use an IBIS model for the 74ALVC244 buffer chip. We start by describing how the IBIS specification can be used to model the buffer. 
+
+\subsubsection{Buffer Output Model}
+
+Consider the generic three-state output buffer shown in Figure \ref{fig:ibis-buffer}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{three-state-ibis.png}
+    \caption{Three-state output buffer\footcite{ibis}.}
+    \label{fig:ibis-buffer}
+\end{figure}
+
+In our case we will model the output of the CMOS devices as a voltage source with a series resistance. The capacitor $C_{comp}$ will be used to model the ramp rate of the falling and rising waveforms. $C_{comp}$ is the silicon die capacitance, and does \textbf{not} include the package parasitics. $R_{pkg}, C_{pkg}, L_{pkg}$ are the electrical characteristics for each pin-to-buffer connection. They are the lumped elements for the overall package.
+
+\vspace{10pt}
+Capacitor $C_{comp}$ is found to be $6.04\,\si{pF}$ (typically) in the IBIS model for the 74ALVC244 at a supply voltage of $V_{DD} = 3.3\,\si{V}$. Package parameters depend on which output pins are used and are summarized in Table \ref{tab:pkg-params}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l l l l}
+        \toprule[1pt]
+        \textbf{Case} & \textbf{Pin} & $R_{pkg}$ [$\si{\ohm}$] & $C_{pkg}$ [$\si{pF}$] & $L_{pkg}$ [$\si{nH}$] \\
+        \midrule
+        Side-by-side microstrip & 1Y2 & 0.09336 & 0.15918 & 1.33430 \\
+        Side-by-side stripline  & 1Y3 & 0.10013 & 0.14031 & 1.44133 \\
+        Broadside stripline     & 1Y4 & 0.11819 & 0.15918 & 1.73153 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Package parameters for the 74ALVC244 buffer (QFN).}
+    \label{tab:pkg-params}
+\end{table}
+
+\newpage
+
+% INSERT FIGURE HERE OF COMPLETE DRIVER + PACKAGE MODEL
+
+\subsubsection{Buffer Input Model}
+
 \subsection{Task 1.2}
 
 Find and estimate the values of the different parameters based on data from the HW test-board, PCB schematic, and the datasheet and IBIS model for the driver/receiver IC. Assume that the aggressor line is matched at the driver end.
