@@ -1,0 +1,58 @@
+name: Lint LaTeX document
+on: [push]
+jobs:
+    lint_latex:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Lint main.tex document
+              uses: ChiefGokhlayeh/textidote-action@v5
+              id: lint_main
+              with:
+                  root_file: main.tex
+                  args: --ignore sh:nonp --read-all
+                  report_file: main.html
+                  working_directory: latex
+
+
+            - name: Lint part_01.tex document
+              uses: ChiefGokhlayeh/textidote-action@v5
+              id: lint_part_01
+              with:
+                  root_file: sections/part_01.tex
+                  args: --ignore sh:nonp --read-all
+                  report_file: part_01.html
+                  working_directory: latex
+
+
+            - name: Lint part_02.tex document
+              uses: ChiefGokhlayeh/textidote-action@v5
+              id: lint_part_02
+              with:
+                  root_file: sections/part_02.tex
+                  args: --ignore sh:nonp --read-all
+                  report_file: part_02.html
+                  working_directory: latex
+
+            - name: Upload TeXtidote report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: textidote_report
+                  path: |
+                    latex/main.html
+                    latex/part_01.html
+                    latex/part_02.html
+
+            - name: Sum warnings
+              id: calc_warnings
+              run: |
+                echo "total_warnings=$((${{ steps.lint_main.outputs.num_warnings }} + ${{ steps.lint_part_01.outputs.num_warnings }} + ${{ steps.lint_part_02.outputs.num_warnings }}))" >> $GITHUB_ENV
+
+            - name: Throw error if linter warnings exist
+              if: ${{ env.total_warnings != 0 }}
+              run: |
+                echo "Total warnings: ${{ env.total_warnings }}"
+                exit 1
+
