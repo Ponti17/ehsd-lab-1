@@ -28,7 +28,7 @@ Consider the generic three-state output buffer shown in Figure \ref{fig:ibis-buf
     \label{fig:ibis-buffer}
 \end{figure}
 
-In our case we will model the output of the CMOS devices as a voltage source with a series resistance. The capacitor $C_{comp}$ will be used to model the ramp rate of the falling and rising waveforms. $C_{comp}$ is the silicon die capacitance, and does \textbf{not} include the package parasitics. $R_{pkg}, C_{pkg}, L_{pkg}$ are the electrical characteristics for each pin-to-buffer connection. They are the lumped elements of the overall package\footcite{ibis}.
+In our case we will model the output of the CMOS devices as a voltage source with a series resistance. The capacitor $C_{comp}$ will be used to model the ramp rate of the falling and rising waveforms. $C_{comp}$ is the silicon die capacitance, and does \textbf{not} include the package parasitics. $R_{pkg}, C_{pkg}, L_{pkg}$ are the electrical characteristics for each pin-to-buffer connection. They are the lumped elements of the overall package.
 
 \vspace{10pt}
 The linear model of the driver circuit is shown in Figure \ref{fig:driver-package}. $V_1, R_1. C_1$ constitute the driver model, and $R_2, C_2, L_2$ are the QFN package parasitics.
@@ -44,7 +44,7 @@ The linear model of the driver circuit is shown in Figure \ref{fig:driver-packag
 
 \subsubsection{Buffer Input Model}
 
-Consider the generic input buffer shown in Figure \ref{fig:ibis-input}. Again we have $C_{pkg}, R_{pkg}, L_{pkg}$ to model the package parasitics. Since the signal will drive the gate(s) of a CMOS circuit, it can be modelled as a single capacitor $C_{comp}$.\footcite{ibis}
+Consider the generic input buffer shown in Figure \ref{fig:ibis-input}. Again we have $C_{pkg}, R_{pkg}, L_{pkg}$ to model the package parasitics. Since the signal will drive the gate(s) of a CMOS circuit, it can be modelled as a single capacitor $C_{comp}$.
 
 \begin{figure}[h]
     \centering
@@ -217,6 +217,39 @@ Capacitor $C_{comp}$ is found to be $4.21\si{pF}$ (typically) in the IBIS model.
 
 \subsubsection{Transmission Line Model Parameters}
 
+To model the transmission line we must the values for the inductors and capacitors in the lumped element model. We also need the inductive coupling coefficient $K$. Denoting the entries in the L, C matrices as $C_{i,j}, L_{i,j}$, the lumped element model values are given by (\ref{eq:cseg_value}), (\ref{eq:cmseg_value}), and (\ref{eq:lseg_value}).
+
+\begin{flalign} \label{eq:cseg_value}
+    &C_{seg} = \frac{x}{N_{seg}} \left( C_{11} + C_{12} \right)&
+\end{flalign}
+\begin{flalign} \label{eq:cmseg_value}
+    &C_{m, seg} = \frac{x}{N_{seg}} (-C_{12})&
+\end{flalign}
+\begin{flalign} \label{eq:lseg_value}
+    &L_{seg} = \frac{x}{N_{seg}} L_{11}&
+\end{flalign}
+\begin{flalign} \label{eq:lseg_value}
+    &K = \frac{L_{12}}{\sqrt{L_{11}L_{22}}}&
+\end{flalign}
+
+The values for the lumped element model are summarized in Table \ref{tab:tl-params}.
+
+\newpage
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l l l l}
+        \toprule[1pt]
+        \textbf{Case} & $K$ & $C$ [$\si{pF}$] & $C_m$ [$\si{pF}$] & $L$ [$\si{nH}$] \\
+        \midrule
+        Side-by-side microstrip & 0.184 & 0.583 & 0.060 & 1.42 \\
+        Side-by-side stripline  & 0.142 & 0.657 & 0.109 & 1.59 \\
+        Broadside stripline     & 0.319 & 0.570 & 0.268 & 1.59 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Transmission line lumped element model values.}
+    \label{tab:tl-params}
+\end{table}
 
 
 \newpage
