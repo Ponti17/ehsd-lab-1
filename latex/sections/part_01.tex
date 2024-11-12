@@ -218,22 +218,25 @@ Capacitor $C_{comp}$ is found to be $4.21\si{pF}$ (typically) in the IBIS model.
 
 The physical resistor values are found by looking at the schematic for the test board. Note that our annotation differs from the schematics. In Table \ref{tab:resistor-params} we summarize the resistor values. To avoid confusion we show the component names from our schematic (Ours) and the corresponding component names from the test board schematic (Theirs).
 
-% FIX ME
-% This table is wrong since the 1k resistors represent BOTH
-% the physical 1k resistor and the probe resistance to GND.
-
 \begin{table}[h]
     \centering
-    \begin{tabular}{l l l}
+    \begin{tabular}{l|l l l}
         \toprule[1pt]
+        \textbf{Description} &
         \makecell[l]{\textbf{Component} \\ \textbf{(Ours)}} & 
         \makecell[l]{\textbf{Component} \\ \textbf{(Theirs)}} &  
         \textbf{Value [$\si{\ohm}$]} \\
         \midrule
-        $R_4$ & $R_{11}$ & $50\,\si{\Omega}$  \\
-        $R_5$ & $R_{12}$ & $1\,\si{k\Omega}$  \\
-        $R_6$ & $R_{13}$ & $1\,\si{k\Omega}$  \\
-        $R_8$ & $R_{13}$ & $1\,\si{k\Omega}$  \\
+        Buffer Output Series Resistor &
+        $R_3$ & $R_{27}$, $R_{28}$, $R_{29}$ & $39\,\si{\Omega}$  \\
+        Victim NEXT Probe Series Resistor &
+        $R_4$ & $R_{12}$, $R_{16}$, $R_{24}$ & $1\,\si{k\Omega}$  \\
+        Victim Shunt Resistor &
+        $R_5$ & $R_{11}$, $R_{14}$, $R_{23}$ & $50\,\si{\Omega}$  \\
+        Victim FEXT Probe Series Resistor &
+        $R_6$ & $R_{13}$, $R_{15}$, $R_{25}$ & $1\,\si{k\Omega}$  \\
+        Aggressor Probe Series Resistor &
+        $R_8$ & $R_{55}$, $R_{56}$, $R_{57}$ & $1\,\si{k\Omega}$  \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Physical resistor values.}
