@@ -248,22 +248,16 @@ For each of the transmission lines calculate the equivalent circuit model of the
 
 \solution
 
-To model the transmission line we must the values for the inductors and capacitors in the lumped element model. We also need the inductive coupling coefficient $K$. Denoting the entries in the L, C matrices as $C_{i,j}, L_{i,j}$, the lumped element model values are given by (\ref{eq:cseg_value}), (\ref{eq:cmseg_value}), and (\ref{eq:lseg_value}).
+To model the transmission line we must the values for the inductors and capacitors in the lumped element model. We also need the inductive coupling coefficient $K$. Denoting the entries in the L, C matrices as $C_{i,j}, L_{i,j}$, the lumped element model values are given by the equations below and summarized in Table \ref{tab:tl-params}.
 
-\begin{flalign} \label{eq:cseg_value}
-    &C_{seg} = \frac{x}{N_{seg}} \left( C_{11} + C_{12} \right)&
-\end{flalign}
-\begin{flalign} \label{eq:cmseg_value}
-    &C_{m, seg} = \frac{x}{N_{seg}} (-C_{12})&
-\end{flalign}
-\begin{flalign} \label{eq:lseg_value}
-    &L_{seg} = \frac{x}{N_{seg}} L_{11}&
-\end{flalign}
-\begin{flalign} \label{eq:k_value}
-    &K = \frac{L_{12}}{\sqrt{L_{11}L_{22}}}&
-\end{flalign}
-
-The values for the lumped element model are summarized in Table \ref{tab:tl-params}.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l}
+        $C_{seg} = \frac{x}{N_{seg}} \left( C_{11} + C_{12} \right)$ & $C_{m, seg} = \frac{x}{N_{seg}} (-C_{12})$ \\
+        & \\
+        $L_{seg} = \frac{x}{N_{seg}} L_{11}$ & $K = \frac{L_{12}}{\sqrt{L_{11}L_{22}}}$ \\
+    \end{tabular}
+\end{table}
 
 \begin{table}[h]
     \centering
@@ -280,13 +274,38 @@ The values for the lumped element model are summarized in Table \ref{tab:tl-para
     \label{tab:tl-params}
 \end{table}
 
-\newpage
-
 \subsection{Task 1.4}
 
 From the datasheet - what are the minimum high input and output levels and the maximum low input and output levels. (Assume $V_{CC} = 3.3\,\si{V} \pm 5\%$, and use the same max current load $\pm 12 \,\si{mA}$ for both output low and high).
 
 \solution
+
+The input and output voltage levels for the 74ALVC244 are summarized in Table \ref{tab:io-levels}.
+
+\begin{itemize}
+    \item $V_{IH}$: The minimum voltage level that is guaranteed to be interpreted as a high logic level.
+    \item $V_{IL}$: The maximum voltage level that is guaranteed to be interpreted as a low logic level.
+    \item $V_{OH}$: The minimum voltage level that is guaranteed to be output when the buffer is driving a high logic level.
+    \item $V_{OL}$: The maximum voltage level that is guaranteed to be output when the buffer is driving a low logic level.
+\end{itemize}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l|lll}
+        \toprule[1pt]
+        \textbf{Paramter} & \textbf{Test Condition} & \textbf{Min} & \textbf{Max} & \textbf{Unit} \\
+        \midrule
+        $V_{IH}$ & $V_{CC} = 2.7\,\si{V}$ to $3.6\,\si{V}$ & 2 &     & $\si{V}$ \\
+        $V_{IL}$ & $V_{CC} = 2.7\,\si{V}$ to $3.6\,\si{V}$ &   & 0.8 & $\si{V}$ \\
+        $V_{OH}$ & $I_{OH} = -12\,\si{mA}$, $V_{CC} = 3\,\si{V}$& 2.4&&$\si{V}$ \\
+        $V_{OL}$ & $I_{OH} = 12\,\si{mA}$, $V_{CC} = 2.7\,\si{V}$&&0.4&$\si{V}$ \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Input and output voltage levels for the 74ALVC244.}
+    \label{tab:io-levels}
+\end{table}
+
+\newpage
 
 \subsection{Task 1.5}
 
