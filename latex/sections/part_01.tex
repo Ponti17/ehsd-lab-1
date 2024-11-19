@@ -278,4 +278,38 @@ Determine the critical crosstalk level in the low state and (high) state. The cr
 
 \solution
 
+\subsection{Task 1.6}
+
+
+Determine crosstalk from the simple quantitative formulas in the textbook (remark – both the aggressor line and the victim line are not matched at the receiver ends:
+
+\solution
+
+The simple quantitative formula for the crosstalk voltage at the victim line due to the aggressor line is given by:
+
+\begin{equation*}
+    V_x = V_{crosstalk} (1+ \frac{R-Z_o}{R+Z_o}) 
+\end{equation*}
+
+Where $V_x$ is the crosstalk at one end of the victim line with the adjustment for the non-ideal termination, $R$ is the impedance of the termination, $Z_o$ is the characteristic impedance of the transmission line and $V_{crosstalk}$ is the crosstalk voltage assuming ideal termination.
+
+\vspace{10pt}
+
+The equation for $V_{crosstalk}$ is dependent on the termination style of the termination, with the possibilities being double terminated, near-end terminated, and far-end terminated. In this case the victim line is double terminated leading to the crosstalk voltage being given by:
+
+\begin{equation*}
+    V_{near} = V_{crosstalk} \left(1+ \frac{R-Z_o}{R+Z_o} \right) = \left(\frac{V(input)}{4} \left(\frac{L_M}{L} + \frac{C_M}{C} \right) \right) \left(1+ \frac{R-Z_o}{R+Z_o} \right)
+\end{equation*}
+
+\begin{equation*}
+    V_{far} = V_{crosstalk} \left(1+ \frac{R-Z_o}{R+Z_o} \right) = \left(-\frac{V(input)X\sqrt{LC}}{2Tr} \left(\frac{L_M}{L} - \frac{C_M}{C} \right) \right) \left(1+ \frac{R-Z_o}{R+Z_o} \right)
+\end{equation*}
+
+Where $V(input)$ is the input to the aggressor line, $X$ is the length of the lines, $Tr$ is the risetime of the signal, $L_M$, $L$, $C_M$ and $C$ being the mutual and self inductance and capacitance respectively.
+
+\vspace{10pt}
+
+The victim's termination consisting of a $50\ohm$ resistor and a $1k\ohm$ resistor at the near-end and a single $1k\ohm$ resistor at the far-end.
+
+
 \end{document}
