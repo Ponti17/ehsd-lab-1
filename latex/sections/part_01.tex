@@ -178,7 +178,7 @@ Capacitor $C_{comp}$ is found to be $6.04\,\si{pF}$ (typically) in the IBIS mode
     \centering
     \begin{tabular}{l|l l l l}
         \toprule[1pt]
-        \textbf{Case} & \textbf{Pin} & $R_{pkg}$ [$\si{\ohm}$] & $C_{pkg}$ [$\si{pF}$] & $L_{pkg}$ [$\si{nH}$] \\
+        \textbf{Case} & \textbf{Pin} & $R_{pkg}$ [$\si{\Omega}$] & $C_{pkg}$ [$\si{pF}$] & $L_{pkg}$ [$\si{nH}$] \\
         \midrule
         Side-by-side microstrip & 1Y2 & 0.09336 & 0.15918 & 1.33430 \\
         Side-by-side stripline  & 1Y3 & 0.10013 & 0.14031 & 1.44133 \\
@@ -199,7 +199,7 @@ Capacitor $C_{comp}$ is found to be $4.21\si{pF}$ (typically) in the IBIS model.
     \centering
     \begin{tabular}{l|l l l l}
         \toprule[1pt]
-        \textbf{Case} & \textbf{Pin} & $R_{pkg}$ [$\si{\ohm}$] & $C_{pkg}$ [$\si{pF}$] & $L_{pkg}$ [$\si{nH}$] \\
+        \textbf{Case} & \textbf{Pin} & $R_{pkg}$ [$\si{\Omega}$] & $C_{pkg}$ [$\si{pF}$] & $L_{pkg}$ [$\si{nH}$] \\
         \midrule
         Side-by-side microstrip & 1A2 & 0.09598 & 0.13711 & 1.38443 \\
         Side-by-side stripline  & 1A3 & 0.09315 & 0.12663 & 1.34060 \\
@@ -484,5 +484,188 @@ Determine crosstalk form the simple quantative formulas in the textbook (remark 
     \caption{Crosstalk measurements for broadside stripline.}
     \label{tab:calc-broadside-stripline}
 \end{table}
+
+\subsection{Task 1.6}
+
+Determine crosstalk from the simple quantitative formulas in the textbook (remark - both the aggressor line and the victim line are not matched at the receiver ends).
+
+\solution
+
+The simple quantitative formula for the crosstalk voltage at the victim line due to the aggressor line is given by:
+
+\begin{equation*}
+    V_x = V_{crosstalk} (1+ \frac{R-Z_o}{R+Z_o}) 
+\end{equation*}
+
+Where $V_x$ is the crosstalk at one end of the victim line with the adjustment for the non-ideal termination, $R$ is the impedance of the termination, $Z_o$ is the characteristic impedance of the transmission line and $V_{crosstalk}$ is the crosstalk voltage assuming ideal termination.
+
+\vspace{10pt}
+
+The equation for the ideal $V_{crosstalk}$ is dependent on the termination style of the termination, with the possibilities being double terminated, near-end terminated, and far-end terminated. In this case the victim line is double terminated leading to the crosstalk voltage being given by:
+
+\begin{equation*}
+    V_{near} = V_{crosstalk} \left(1+ \frac{R-Z_o}{R+Z_o} \right) = \left(\frac{V(input)}{4} \left(\frac{L_M}{L} + \frac{C_M}{C} \right) \right) \left(1+ \frac{R-Z_o}{R+Z_o} \right)
+\end{equation*}
+
+\begin{equation*}
+    V_{far} = V_{crosstalk} \left(1+ \frac{R-Z_o}{R+Z_o} \right) = \left(-\frac{V(input)X\sqrt{LC}}{2Tr} \left(\frac{L_M}{L} - \frac{C_M}{C} \right) \right) \left(1+ \frac{R-Z_o}{R+Z_o} \right)
+\end{equation*}
+
+Where $V(input)$ is the input to the aggressor line, $X$ is the length of the lines, $Tr$ is the risetime of the signal, $L_M$, $L$, $C_M$ and $C$ being the mutual and self inductance and capacitance respectively.
+
+\vspace{10pt}
+Most of these values are given or stated, the rest needs to be calculated. The value needed for the crosstalk formula that is uknown is the characteristic impedance $Z_0$. To determine this the formulas usually depend on whether it's a microstrip, symmetrical stripline or offset stripline but since the self- and mutual inductance and capacitance are given, we can use this simpler formula instead:
+
+\begin{equation*}
+    Z_0 = \sqrt{\frac{L}{C}}
+\end{equation*}
+
+\vspace{10pt}
+
+So, the characteristic impedance of the different transmission lines (microstrip, side-by-side stripline, broadside stripline) are:
+
+\begin{equation}
+    Z_{mic} = \sqrt{\frac{L_{mic}}{C_{mic}}} = \sqrt{\frac{283.4}{128.5}} \cong 1.485
+\label{eq:z_mic}
+\end{equation}
+
+\begin{equation}
+    Z_{ss} = \sqrt{\frac{L_{ss}}{C_{ss}}} = \sqrt{\frac{318.5}{153.3}} \cong 1.441
+\label{eq:z_ss}
+\end{equation}
+
+\begin{equation}
+    Z_{bs} = \sqrt{\frac{L_{bs}}{C_{bs}}} = \sqrt{\frac{318}{167.5}} \cong 1.378
+\label{eq:z_bs}
+\end{equation}
+
+Now that the characteristic impedance have been found, we can use the equation for the crosstalk. Firstly we must find the values needed for it. These are gathered in the table \ref{tab:cross_talk_table}.
+
+\begin{table}[H]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lll}
+\textbf{Variable} & \textbf{Description}                      & \textbf{Value}  \\ \toprule[1pt]
+\multicolumn{1}{c}{R}           & Termination resistor                                  & 1 k$\Omega$ \\
+\multicolumn{1}{c}{$Z_0$}       & Characteristic Impedence for the transmission line    & See equations \ref{eq:z_mic} - \ref{eq:z_bs}\\
+\multicolumn{1}{c}{$V(input)$}  & Input voltage of the aggressor line                   & 3.3V \\
+\multicolumn{1}{c}{L}           & Self inductance of the victim line                    & See table \ref{tab:lc-matrix} \\
+\multicolumn{1}{c}{$L_M$}       & Mutual inductance of the lines                        & See table \ref{tab:lc-matrix} \\
+\multicolumn{1}{c}{C}           & Self capacitance of the victim line                   & See table \ref{tab:lc-matrix} \\
+\multicolumn{1}{c}{$C_M$}       & Mutual capacitance of the lines                       & See table \ref{tab:lc-matrix} \\
+\multicolumn{1}{c}{X}           & Length of the transmission line                       & 10 cm \\
+\multicolumn{1}{c}{Tr}          & Rise time of the aggresor line pulses                 & 500 ps  
+\end{tabular}%
+}
+\caption{Table over needed values for calculating the crosstalk}
+\label{tab:cross_talk_table}
+\end{table}
+
+Using these values to calculate the crosstalk at the far end of the microstrips would give the following:
+
+\begin{multline}
+    V_{far} = \left(-\frac{V(input)X\sqrt{LC}}{2Tr} \left(\frac{L_M}{L} - \frac{C_M}{C} \right) \right) \left(1+ \frac{R-Z_{mic}}{R+Z_{mic}} \right) \\
+    = \left(-\frac{3.3V \cdot 0.01m\sqrt{283.4 nH \cdot 128.5 pF}}{2 \cdot 500 ps} \left(\frac{52.2 nH}{283.4 nH} - \frac{-12 pF}{128.5 pF} \right) \right) \left(1+ \frac{1k\Omega - 1.485\Omega}{1k\Omega+1.485\Omega} \right) \\ 
+  = \left(-\frac{33mmV\sqrt{36417 nHpF}}{1000 ps} \left(0.184 - (-0.093) \right) \right) \left(1+ 0.91 \right) \\
+  \cong -0.199V  \cdot 0.277 \cdot 1.91 \\ \cong -0.1056 V
+\label{eq:FEXT_microstrip}
+\end{multline}
+
+So there should be roughly -105mV at the far end of the microstrip caused by the crosstalk from the aggressorline. This is then used to find the low- and high-state steady-state and critical level of voltage at the near- and far-end of the transmission line. The crosstalk for other scenarios; microstrip, side-by-side striplines and broadside, either far or near-end, can be found in a similar manner and the results are summarized in table \ref{tab:crosstalk_results}. 
+
+\vspace{10pt}
+In the theoretical model, the steady state level is the voltage that the victim line would have if there was no crosstalk. This is simply the voltage applied to the victim line; 0V for low state and 3.3V for high state.
+
+\vspace{10pt}
+The critical level is the voltage achieved due to the crosstalk that pushes the signal closest to the undefined terriory between low and high. Since the crosstalk appears both positively and negatively due to it being pulses, we find the critical level by the worst case scenario, either adding or subtracting the crosstalk voltage from the victim line. For example the critical level of the low state at the far end of the microstrip would be:
+
+\begin{equation}
+    Low\,State\,Critical\,Level = Steady\,State\,Level + |V_{far}| = 0 V + |-0.1056 V| = 0.1056 V
+\end{equation}
+
+If instead it was the critical level during high state, we would have:
+
+\begin{equation}
+    High\,State\,Critical\,Level = Steady\,State\,Level - |V_{far}| = 3.3 V - |-0.1056 V| = 3.1944 V
+\end{equation}
+
+The crosstalk for all scenarios is summarized in table \ref{tab:crosstalk_results}. The steady state and critical level voltages are summarised in \ref{tab:analytical-microstrip}, \ref{tab:analytical-sidebyside-stripline} and \ref{tab:analytical-broadside-stripline}. Below, on figure \ref{fig:microstrip_voltage_curve} a visual representation of influence of the crosstalk on the victim line is shown.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{crosstalk_visu.png}
+    \caption{Voltage curve over time at the near-end and far-end end of the victim line.}
+    \label{fig:microstrip_voltage_curve}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cl|lr|lr|lr}
+    \toprule[1pt]
+    \multicolumn{2}{c|}{\textbf{Setting}}                                   & \multicolumn{2}{c|}{\textbf{Microstrip}} & \multicolumn{2}{c|}{\textbf{\textbf{Side-by-Side}}} & \multicolumn{2}{c}{\textbf{Broadside}}  \\ \midrule
+    End                       &                                    & \textit{Near} & \textit{Far}             & \textit{Near}     & \textit{Far}                    & \textit{Near}            & \textit{Far}   \\   \midrule
+    Crosstalk                 &                                    & 0.143      & -0.106                      & $3.846 \cdot 10^{-5}$ & -0.125                      & $-8.46\cdot 10^{-4}$     & -0.295       \\
+    \end{tabular}
+    \caption{Table over crosstalk voltage at respectively Near-end and Far-end at Microstrips, Side-by-Side Striplines and Broadside Striplines. All values are in volts.}
+\label{tab:crosstalk_results}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State &  & 0 & 0.143\\
+        High State &  & 3.3 & 3.157\\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & 0.106\\
+        High State & & 3.3 & 3.194\\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Steady State and Critical values for the microstrip found during the analytical analysis.}
+    \label{tab:analytical-microstrip}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & $3.846 \cdot 10^{-5}$\\
+        High State & & 3.3 & 3.3\\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & 0.125\\
+        High State & & 3.3 & 3.175\\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Steady State and Critical values for the side-by-side striplines found during the analytical analysis.}
+    \label{tab:analytical-sidebyside-stripline}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & $8.46\cdot 10^{-4}$ \\
+        High State & & 3.3 & 3.299\\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 &  0.295\\
+        High State & & 3.3 & 3.005\\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Steady State and Critical values for the broadside striplines found during the analytical analysis.}
+    \label{tab:analytical-broadside-stripline}
+\end{table}
+
+The analytical and simulation results do not match exactly, which is assumed to be caused by the differences between the idealized assumptions of the analytical approach and the more reality-near conditions represented in the simulation such as non-linearities, non-idealities, or numerical approximations. However, the results are sufficiently close to be considered valid.
 
 \end{document}
