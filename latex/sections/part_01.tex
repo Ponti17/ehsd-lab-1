@@ -161,11 +161,6 @@ We see that all cases \textit{luckily} only require 2 segments. The lumped eleme
     \label{fig:transmission-line}
 \end{figure}
 
-\subsubsection{Combined Model}
-
-% INSERT COMBINED MODEL HERE
-% REMEMBER PROBE POINTS
-
 \newpage
 
 \subsection{Task 1.2}
@@ -322,42 +317,53 @@ Determine the critical crosstalk level in the low state and (high) state. The cr
 
 \solution
 
-\subsubsection{Side-by-Side Microstrip}
+Using the vales from the previous tasks we can now simulate the crosstalk for each of the three transmission line configurations. The waveforms are shown in Figure \ref{fig:waveforms}, and the critical crosstalk levels are summarized in Tables \ref{tab:sim-side-by-side-microstrip}, \ref{tab:sim-side-by-side-stripline}, and \ref{tab:sim-broadside-stripline}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{sim.pdf}
+    \caption{Waveforms for the three transmission line configurations.}
+    \label{fig:waveforms}
+\end{figure}
+
+\subsubsection{Side-by-side Microstrip}
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|l l l}
+    \begin{tabular}{l l|r r}
         \toprule[1pt]
         \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 21.0 \\
+        & High State & 0 & -20.9 \\
         \midrule[1pt]
         \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 56.9 \\
+        & High State & 0 & -56.5 \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Crosstalk measurements for side-by-side microstrip.}
     \label{tab:sim-side-by-side-microstrip}
 \end{table}
 
-\subsubsection{Side-by-Side Stripline}
+\newpage
+
+\subsubsection{Side-by-side Stripline}
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|l l l}
+    \begin{tabular}{l l|r r}
         \toprule[1pt]
         \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 40.2 \\
+        & High State & 0 & -40.2 \\
         \midrule[1pt]
         \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 65.6 \\
+        & High State & 0 & -66.3 \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Crosstalk measurements for side-by-side microstrip.}
@@ -368,17 +374,17 @@ Determine the critical crosstalk level in the low state and (high) state. The cr
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|l l l}
+    \begin{tabular}{l l|r r}
         \toprule[1pt]
         \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 95.7 \\
+        & High State & 0 & -95.9 \\
         \midrule[1pt]
         \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 153 \\
+        & High State & 0 & -153 \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Crosstalk measurements for broadside stripline.}
