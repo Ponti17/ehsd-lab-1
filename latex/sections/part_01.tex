@@ -319,10 +319,13 @@ Determine the critical crosstalk level in the low state and (high) state. The cr
 
 Using the vales from the previous tasks we can now simulate the crosstalk for each of the three transmission line configurations. The waveforms are shown in Figure \ref{fig:waveforms}, and the critical crosstalk levels are summarized in Tables \ref{tab:sim-side-by-side-microstrip}, \ref{tab:sim-side-by-side-stripline}, and \ref{tab:sim-broadside-stripline}.
 
+\vspace{10pt}
+Note that the critical crosstalk levels are the maximum and minimum voltage levels over the victim line due to crosstalk. The steady-state levels are the voltage levels when the line is in a low or high state. Since we simulate an ideal transmission line with \textbf{no} losses, the steady-state levels are $0\,\si{mV}$. We see also that the critical levels are well below the minimum and maximum input/output levels for the 74ALVC244.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{sim.pdf}
-    \caption{Waveforms for the three transmission line configurations.}
+    \caption{Simulated waveforms for the three transmission line configurations.}
     \label{fig:waveforms}
 \end{figure}
 
