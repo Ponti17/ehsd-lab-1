@@ -13,6 +13,7 @@ Draw the equivalent circuit model to be used to simulate the crosstalk in each o
 \vspace{10pt}
 The model must include the driver circuit (linear model), package parasitics (simple model), transmission lines, and probe points, and receiver circuit (linear model).
 
+\solution
 
 To model the driver, receiver and all package parasitics we will use an IBIS model for the 74ALVC244 buffer chip. We start by describing how the IBIS specification can be used to model the buffer. 
 
@@ -291,7 +292,7 @@ The input and output voltage levels for the 74ALVC244 are summarized in Table \r
     \centering
     \begin{tabular}{l|l|lll}
         \toprule[1pt]
-        \textbf{Paramter} & \textbf{Test Condition} & \textbf{Min} & \textbf{Max} & \textbf{Unit} \\
+        \textbf{Parameter} & \textbf{Test Condition} & \textbf{Min} & \textbf{Max} & \textbf{Unit} \\
         \midrule
         $V_{IH}$ & $V_{CC} = 2.7\,\si{V}$ to $3.6\,\si{V}$ & 2 &     & $\si{V}$ \\
         $V_{IL}$ & $V_{CC} = 2.7\,\si{V}$ to $3.6\,\si{V}$ &   & 0.8 & $\si{V}$ \\
@@ -303,7 +304,23 @@ The input and output voltage levels for the 74ALVC244 are summarized in Table \r
     \label{tab:io-levels}
 \end{table}
 
+Based on this we calculate the noise margins (shown in Table \ref{tab:noise-margin}).
+
 \newpage
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|r r}
+        \toprule[1pt]
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+        \midrule
+        Noise Margin (Low State)  & 0.8 & $\si{V}$ \\
+        Noise Margin (High State) & 1.3 & $\si{V}$ \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Noise margins ($V_{DD} = 3.3\,\si{V}$).}
+    \label{tab:noise-margin}
+\end{table}
 
 \subsection{Task 1.5}
 
@@ -329,6 +346,8 @@ Note that the critical crosstalk levels are the maximum and minimum voltage leve
     \label{fig:waveforms}
 \end{figure}
 
+\newpage
+
 \subsubsection{Side-by-side Microstrip}
 
 \begin{table}[h]
@@ -349,8 +368,6 @@ Note that the critical crosstalk levels are the maximum and minimum voltage leve
     \caption{Crosstalk measurements for side-by-side microstrip.}
     \label{tab:sim-side-by-side-microstrip}
 \end{table}
-
-\newpage
 
 \subsubsection{Side-by-side Stripline}
 
