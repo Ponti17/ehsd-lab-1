@@ -338,7 +338,7 @@ Now that the characteristic impedance have been found, we can use the equation f
 \begin{table}[H]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lll}
-\textbf{Variable} & \textbf{Description}                      & \textbf{Value}  \\\hline
+\textbf{Variable} & \textbf{Description}                      & \textbf{Value}  \\ \toprule[1pt]
 \multicolumn{1}{c}{R}           & Termination resistor                                  & 1 k$\ohm$ \\
 \multicolumn{1}{c}{$Z_0$}       & Characteristic Impedence for the transmission line    & See equations \ref{eq:z_mic} - \ref{eq:z_bs}\\
 \multicolumn{1}{c}{$V(input)$}  & Input voltage of the aggressor line                   & 3.3V \\
@@ -369,7 +369,6 @@ So there should be roughly -105mV at the far end of the microstrip caused by the
 \vspacec{10pt}
 
 In the theoretical model, the steady state level is the voltage that the victim line would have if there was no crosstalk. This is simply the voltage applied to the victim line; 0V for low state and 3.3V for high state.
-%Jeg ved squ ikke lige om det her er rigtigt, jeg skal lige dobbelt tjekke med Hooman.
 
 \vspacec{10pt}
 
@@ -385,44 +384,85 @@ If instead it was the critical level during high state, we would have:
     High\,State\,Critical\,Level = Steady\,State\,Level - |V_{far}| = 3.3 V - |-0.1056 V| = 3.1944 V
 \end{equation}
 
-The steady state and critical levels for all scenarios are summarized in table \ref{tab:crosstalk_results}. Below, on figure \re{fig:microstrip_voltage_curve} a visual representation of influence of the crosstalk on the victim line is shown.
+The crosstalk for all scenarios is summarized in table \ref{tab:crosstalk_results}. The steady state and critical level voltages are summarised in \ref{tab:analytical-microstrip}, \ref{tab:analytical-sidebyside-stripline} and \ref{tab:analytical-broadside-stripline}. Below, on figure \ref{fig:microstrip_voltage_curve} a visual representation of influence of the crosstalk on the victim line is shown.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{placeholder.png}
+    \includegraphics[width=0.8\textwidth]{microstrip_voltage_curve.png}
     \caption{Voltage curve over time at the near-end and far-end end of the victim line.}
     \label{fig:microstrip_voltage_curve}
 \end{figure}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{cl|ll|ll|ll}
-    \multicolumn{2}{c|}{\textbf{Setting}}                                   & \multicolumn{2}{c|}{\textbf{Microstrip}} & \multicolumn{2}{l|}{\textbf{\textbf{Side-by-Side}}} & \multicolumn{2}{c}{\textbf{Broadside}}  \\ \hline
-    \textbf{End}                       &                                    & \textit{N} & \textit{F}                  & \textit{N}     & \textit{F}                         & \textit{N}               & \textit{F}   \\ \hline
-    \textbf{Steady State}              &                                    & 0          & 0                           & 3.3            & 3.3                                & 0                        & 3.3          \\
-    \textbf{Crosstalk}                 &                                    & 0.143      & -0.106                      & $3.846 \cdot 10^{-5}$ & -0.125                      & $-8.46\cdot 10^{-4}$     & -0.295       \\
-    \multirow{2}{*}{\textbf{Critical}} & \multicolumn{1}{c|}{\textit{Low}}  & 0.143      & 0.106                       & $3.846 \cdot 10^{-5}$ & 0.125                       & $8.46\cdot 10^{-4}$     & 0.295         \\
-                                       & \multicolumn{1}{c|}{\textit{High}} & 3.157      & 3.194                       & 3.3            & 3.175                              & 3.299                    & 3.005                  
+    \begin{tabular}{cl|lr|lr|lr}
+    \toprule[1pt]
+    \multicolumn{2}{c|}{\textbf{Setting}}                                   & \multicolumn{2}{c|}{\textbf{Microstrip}} & \multicolumn{2}{c|}{\textbf{\textbf{Side-by-Side}}} & \multicolumn{2}{c}{\textbf{Broadside}}  \\ \midrule
+    End                       &                                    & \textit{Near} & \textit{Far}             & \textit{Near}     & \textit{Far}                    & \textit{Near}            & \textit{Far}   \\   \midrule
+    Crosstalk                 &                                    & 0.143      & -0.106                      & $3.846 \cdot 10^{-5}$ & -0.125                      & $-8.46\cdot 10^{-4}$     & -0.295       \\
     \end{tabular}
-    \caption{Table over Steady State, Crosstalk and Critical level voltage at respectively Near-end and Far-end at Microstrips, Side-by-Side Striplines and Broadside Striplines. All values are in volts.}
+    \caption{Table over crosstalk voltage at respectively Near-end and Far-end at Microstrips, Side-by-Side Striplines and Broadside Striplines. All values are in volts.}
 \label{tab:crosstalk_results}
 \end{table}
 
-\textbf{Does this match the simulation results in task 1.5??}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State &  & 0 & 0.143\\
+        High State &  & 3.3 & 3.157\\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & 0.106\\
+        High State & & 3.3 & 3.194\\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Steady State and Critical values for the microstrip found during the analytical analysis.}
+    \label{tab:analytical-microstrip}
+\end{table}
 
- 
-\vspace{10pt}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & $3.846 \cdot 10^{-5}$\\
+        High State & & 3.3 & 3.3\\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & 0.125\\
+        High State & & 3.3 & 3.175\\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Steady State and Critical values for the side-by-side striplines found during the analytical analysis.}
+    \label{tab:analytical-sidebyside-stripline}
+\end{table}
 
-Noter fra lab session : Spørg Hooman
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 & $8.46\cdot 10^{-4}$ \\
+        High State & & 3.3 & 3.299\\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        Low State & & 0 &  0.295\\
+        High State & & 3.3 & 3.005\\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Steady State and Critical values for the broadside striplines found during the analytical analysis.}
+    \label{tab:analytical-broadside-stripline}
+\end{table}
 
-Comment on the importance of the indivual parameters in the crosstalk formula.
-
-\vspace{10pt}
-
-Comment on things that can impact the difference between the analytical, simulated and measured crosstalk.
-- noise
-- cable losses
-- not a lossless transmission line
+The analytical and simulation results do not match exactly, which is assumed to be caused by the differences between the idealized assumptions of the analytical approach and the more reality-near conditions represented in the simulation such as non-linearities, non-idealities, or numerical approximations. However, the results are sufficiently close to be considered valid.
 
 
 \end{document}
