@@ -418,75 +418,6 @@ To ensure proper function the critical levels must not exceed the noise margins.
 
 \subsection{Task 1.6}
 
-Determine crosstalk form the simple quantative formulas in the textbook (remark - both the agressor line and the victim line are not matched at the receiver ends).
-
-\solution
-
-\subsubsection{Side-by-Side Microstrip}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{l l|l l}
-        \toprule[1pt]
-        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
-        \midrule
-        & Low State & & \\
-        & High State & & \\
-        \midrule[1pt]
-        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
-        \midrule
-        & Low State & & \\
-        & High State & & \\
-        \bottomrule[1pt]
-    \end{tabular}
-    \caption{Crosstalk measurements for side-by-side microstrip.}
-    \label{tab:calc-side-by-side-microstrip}
-\end{table}
-
-\subsubsection{Side-by-Side Stripline}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{l l|l l}
-        \toprule[1pt]
-        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
-        \midrule
-        & Low State & & \\
-        & High State & & \\
-        \midrule[1pt]
-        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
-        \midrule
-        & Low State & & \\
-        & High State & & \\
-        \bottomrule[1pt]
-    \end{tabular}
-    \caption{Crosstalk measurements for side-by-side microstrip.}
-    \label{tab:calc-side-by-side-stripline}
-\end{table}
-
-\subsubsection{Broadside Stripline}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{l l|l l}
-        \toprule[1pt]
-        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
-        \midrule
-        & Low State & & \\
-        & High State & & \\
-        \midrule[1pt]
-        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
-        \midrule
-        & Low State & & \\
-        & High State & & \\
-        \bottomrule[1pt]
-    \end{tabular}
-    \caption{Crosstalk measurements for broadside stripline.}
-    \label{tab:calc-broadside-stripline}
-\end{table}
-
-\subsection{Task 1.6}
-
 Determine crosstalk from the simple quantitative formulas in the textbook (remark - both the aggressor line and the victim line are not matched at the receiver ends).
 
 \solution
@@ -539,9 +470,11 @@ So, the characteristic impedance of the different transmission lines (microstrip
 \label{eq:z_bs}
 \end{equation}
 
+\newpage
+
 Now that the characteristic impedance have been found, we can use the equation for the crosstalk. Firstly we must find the values needed for it. These are gathered in the table \ref{tab:cross_talk_table}.
 
-\begin{table}[H]
+\begin{table}[h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lll}
 \textbf{Variable} & \textbf{Description}                      & \textbf{Value}  \\ \toprule[1pt]
@@ -588,16 +521,18 @@ If instead it was the critical level during high state, we would have:
     High\,State\,Critical\,Level = Steady\,State\,Level - |V_{far}| = 3.3 V - |-0.1056 V| = 3.1944 V
 \end{equation}
 
+\newpage
+
 The crosstalk for all scenarios is summarized in table \ref{tab:crosstalk_results}. The steady state and critical level voltages are summarised in \ref{tab:analytical-microstrip}, \ref{tab:analytical-sidebyside-stripline} and \ref{tab:analytical-broadside-stripline}. Below, on figure \ref{fig:microstrip_voltage_curve} a visual representation of influence of the crosstalk on the victim line is shown.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{crosstalk_visu.png}
     \caption{Voltage curve over time at the near-end and far-end end of the victim line.}
     \label{fig:microstrip_voltage_curve}
 \end{figure}
 
-\begin{table}[H]
+\begin{table}[h]
     \centering
     \begin{tabular}{cl|lr|lr|lr}
     \toprule[1pt]
@@ -627,6 +562,8 @@ The crosstalk for all scenarios is summarized in table \ref{tab:crosstalk_result
     \caption{Steady State and Critical values for the microstrip found during the analytical analysis.}
     \label{tab:analytical-microstrip}
 \end{table}
+
+\newpage
 
 \begin{table}[h]
     \centering
