@@ -162,11 +162,6 @@ We see that all cases \textit{luckily} only require 2 segments. The lumped eleme
     \label{fig:transmission-line}
 \end{figure}
 
-\subsubsection{Combined Model}
-
-% INSERT COMBINED MODEL HERE
-% REMEMBER PROBE POINTS
-
 \newpage
 
 \subsection{Task 1.2}
@@ -215,26 +210,53 @@ Capacitor $C_{comp}$ is found to be $4.21\si{pF}$ (typically) in the IBIS model.
     \label{tab:pkg-params2}
 \end{table}
 
-\subsubsection{Transmission Line Model Parameters}
+\subsubsection{Physical Resistors}
 
-To model the transmission line we must the values for the inductors and capacitors in the lumped element model. We also need the inductive coupling coefficient $K$. Denoting the entries in the L, C matrices as $C_{i,j}, L_{i,j}$, the lumped element model values are given by (\ref{eq:cseg_value}), (\ref{eq:cmseg_value}), and (\ref{eq:lseg_value}).
+The physical resistor values are found by looking at the schematic for the test board. Note that our annotation differs from the schematics. In Table \ref{tab:resistor-params} we summarize the resistor values. To avoid confusion we show the component names from our schematic (Ours) and the corresponding component names from the test board schematic (Theirs).
 
-\begin{flalign} \label{eq:cseg_value}
-    &C_{seg} = \frac{x}{N_{seg}} \left( C_{11} + C_{12} \right)&
-\end{flalign}
-\begin{flalign} \label{eq:cmseg_value}
-    &C_{m, seg} = \frac{x}{N_{seg}} (-C_{12})&
-\end{flalign}
-\begin{flalign} \label{eq:lseg_value}
-    &L_{seg} = \frac{x}{N_{seg}} L_{11}&
-\end{flalign}
-\begin{flalign} \label{eq:lseg_value}
-    &K = \frac{L_{12}}{\sqrt{L_{11}L_{22}}}&
-\end{flalign}
-
-The values for the lumped element model are summarized in Table \ref{tab:tl-params}.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l l l}
+        \toprule[1pt]
+        \textbf{Description} &
+        \makecell[l]{\textbf{Component} \\ \textbf{(Ours)}} & 
+        \makecell[l]{\textbf{Component} \\ \textbf{(Theirs)}} &  
+        \textbf{Value [$\si{\ohm}$]} \\
+        \midrule
+        Buffer Output Series Resistor &
+        $R_3$ & $R_{27}$, $R_{28}$, $R_{29}$ & $39\,\si{\Omega}$  \\
+        Victim NEXT Probe Series Resistor &
+        $R_4$ & $R_{12}$, $R_{16}$, $R_{24}$ & $1\,\si{k\Omega}$  \\
+        Victim Shunt Resistor &
+        $R_5$ & $R_{11}$, $R_{14}$, $R_{23}$ & $50\,\si{\Omega}$  \\
+        Victim FEXT Probe Series Resistor &
+        $R_6$ & $R_{13}$, $R_{15}$, $R_{25}$ & $1\,\si{k\Omega}$  \\
+        Aggressor Probe Series Resistor &
+        $R_8$ & $R_{55}$, $R_{56}$, $R_{57}$ & $1\,\si{k\Omega}$  \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Physical resistor values.}
+    \label{tab:resistor-params}
+\end{table}
 
 \newpage
+
+\subsection{Task 1.3}
+
+For each of the transmission lines calculate the equivalent circuit model of the system of the coupled transmission lines. Assume $T_{rise} = 500\,\si{ps}$.
+
+\solution
+
+To model the transmission line we must the values for the inductors and capacitors in the lumped element model. We also need the inductive coupling coefficient $K$. Denoting the entries in the L, C matrices as $C_{i,j}, L_{i,j}$, the lumped element model values are given by the equations below and summarized in Table \ref{tab:tl-params}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l}
+        $C_{seg} = \frac{x}{N_{seg}} \left( C_{11} + C_{12} \right)$ & $C_{m, seg} = \frac{x}{N_{seg}} (-C_{12})$ \\
+        & \\
+        $L_{seg} = \frac{x}{N_{seg}} L_{11}$ & $K = \frac{L_{12}}{\sqrt{L_{11}L_{22}}}$ \\
+    \end{tabular}
+\end{table}
 
 \begin{table}[h]
     \centering
@@ -251,20 +273,54 @@ The values for the lumped element model are summarized in Table \ref{tab:tl-para
     \label{tab:tl-params}
 \end{table}
 
-
-\newpage
-
-\subsection{Task 1.3}
-
-For each of the transmission lines calculate the equivalent circuit model of the system of the coupled transmission lines. Assume $T_{rise} = 500\,\si{ps}$.
-
-\solution
-
 \subsection{Task 1.4}
 
 From the datasheet - what are the minimum high input and output levels and the maximum low input and output levels. (Assume $V_{CC} = 3.3\,\si{V} \pm 5\%$, and use the same max current load $\pm 12 \,\si{mA}$ for both output low and high).
 
 \solution
+
+The input and output voltage levels for the 74ALVC244 are summarized in Table \ref{tab:io-levels}.
+
+\begin{itemize}
+    \item $V_{IH}$: The minimum voltage level that is guaranteed to be interpreted as a high logic level.
+    \item $V_{IL}$: The maximum voltage level that is guaranteed to be interpreted as a low logic level.
+    \item $V_{OH}$: The minimum voltage level that is guaranteed to be output when the buffer is driving a high logic level.
+    \item $V_{OL}$: The maximum voltage level that is guaranteed to be output when the buffer is driving a low logic level.
+\end{itemize}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l|lll}
+        \toprule[1pt]
+        \textbf{Parameter} & \textbf{Test Condition} & \textbf{Min} & \textbf{Max} & \textbf{Unit} \\
+        \midrule
+        $V_{IH}$ & $V_{CC} = 2.7\,\si{V}$ to $3.6\,\si{V}$ & 2 &     & $\si{V}$ \\
+        $V_{IL}$ & $V_{CC} = 2.7\,\si{V}$ to $3.6\,\si{V}$ &   & 0.8 & $\si{V}$ \\
+        $V_{OH}$ & $I_{OH} = -12\,\si{mA}$, $V_{CC} = 3\,\si{V}$& 2.4&&$\si{V}$ \\
+        $V_{OL}$ & $I_{OH} = 12\,\si{mA}$, $V_{CC} = 2.7\,\si{V}$&&0.4&$\si{V}$ \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Input and output voltage levels for the 74ALVC244.}
+    \label{tab:io-levels}
+\end{table}
+
+Based on this we calculate the noise margins (shown in Table \ref{tab:noise-margin}). When in \textbf{LOW} state, if the noise exceeds a voltage level of $0.8\,\si{V}$ we can no longer be certain that it will be interpreted as a low logic level. When in \textbf{HIGH} state (3.3V), if the noise levels exceeds $1.3\,\si{V}$ then we cross the minimum value that we are certain will be interpreted as a high logic level.
+
+\newpage
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|r r}
+        \toprule[1pt]
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+        \midrule
+        Noise Margin (Low State)  & 0.8 & $\si{V}$ \\
+        Noise Margin (High State) & 1.3 & $\si{V}$ \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Noise margins ($V_{DD} = 3.3\,\si{V}$).}
+    \label{tab:noise-margin}
+\end{table}
 
 \subsection{Task 1.5}
 
@@ -277,5 +333,156 @@ Document the voltage curves over time, at the driver and receiver ends of the ag
 Determine the critical crosstalk level in the low state and (high) state. The critical crosstalk level when the line is in a low (high) state is the maximum (minimum) voltage over the victim line due to crosstalk.
 
 \solution
+
+Using the vales from the previous tasks we can now simulate the crosstalk for each of the three transmission line configurations. The waveforms are shown in Figure \ref{fig:waveforms}, and the critical crosstalk levels are summarized in Tables \ref{tab:sim-side-by-side-microstrip}, \ref{tab:sim-side-by-side-stripline}, and \ref{tab:sim-broadside-stripline}.
+
+\vspace{10pt}
+Note that the critical crosstalk levels are the maximum and minimum voltage levels over the victim line due to crosstalk. The steady-state levels are the voltage levels when the line is in a low or high state. Since we simulate an ideal transmission line with \textbf{no} losses, the steady-state levels are $0\,\si{mV}$. We see also that the critical levels are well below the minimum and maximum input/output levels for the 74ALVC244.
+
+\vspace{10pt}
+To ensure proper function the critical levels must not exceed the noise margins. We see that we are well below the noise margins in the simulation.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{sim.pdf}
+    \caption{Simulated waveforms for the three transmission line configurations.}
+    \label{fig:waveforms}
+\end{figure}
+
+\newpage
+
+\subsubsection{Side-by-side Microstrip}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.021 \\
+        & High State & 3.3 & 3.28 \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.057 \\
+        & High State & 3.3 & 3.24 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for side-by-side microstrip.}
+    \label{tab:sim-side-by-side-microstrip}
+\end{table}
+
+\subsubsection{Side-by-side Stripline}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 40.2 \\
+        & High State & 3.3 & 3.26 \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 65.6 \\
+        & High State & 3.3 & 3.23 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for side-by-side microstrip.}
+    \label{tab:sim-side-by-side-stripline}
+\end{table}
+
+\subsubsection{Broadside Stripline}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 95.7 \\
+        & High State & 3.3 & 3.20 \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 153 \\
+        & High State & 3.3 & 3.15 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for broadside stripline.}
+    \label{tab:sim-broadside-stripline}
+\end{table}
+
+\newpage
+
+\subsection{Task 1.6}
+
+Determine crosstalk form the simple quantative formulas in the textbook (remark - both the agressor line and the victim line are not matched at the receiver ends).
+
+\solution
+
+\subsubsection{Side-by-Side Microstrip}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|l l}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \midrule
+        & Low State & & \\
+        & High State & & \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \midrule
+        & Low State & & \\
+        & High State & & \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for side-by-side microstrip.}
+    \label{tab:calc-side-by-side-microstrip}
+\end{table}
+
+\subsubsection{Side-by-Side Stripline}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|l l}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \midrule
+        & Low State & & \\
+        & High State & & \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \midrule
+        & Low State & & \\
+        & High State & & \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for side-by-side microstrip.}
+    \label{tab:calc-side-by-side-stripline}
+\end{table}
+
+\subsubsection{Broadside Stripline}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|l l}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \midrule
+        & Low State & & \\
+        & High State & & \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \midrule
+        & Low State & & \\
+        & High State & & \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for broadside stripline.}
+    \label{tab:calc-broadside-stripline}
+\end{table}
 
 \end{document}

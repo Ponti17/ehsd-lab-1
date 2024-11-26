@@ -6,21 +6,30 @@
 
 \section{Part 2 - Measurements}
 
+The measured waveforms are shown in Figure \ref{fig:meas-waveforms}, and the critical crosstalk levels are summarized in Tables \ref{tab:meas-side-by-side-microstrip}, \ref{tab:meas-side-by-side-stripline}, and \ref{tab:meas-broadside-stripline}. We see that we are still well within the noise margins.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{measured.pdf}
+    \caption{Measured waveforms for the three transmission line configurations.}
+    \label{fig:meas-waveforms}
+\end{figure}
+
 \subsection{Task 2.1 - Crosstalk side-by-side microstrip}
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|l l l}
+    \begin{tabular}{l l|r r}
         \toprule[1pt]
-        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 0.199 \\
+        & High State & 3.3 & 3.18 \\
         \midrule[1pt]
-        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 0.269 \\
+        & High State & 3.3 & 3.16 \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Crosstalk measurements for side-by-side microstrip.}
@@ -31,38 +40,40 @@
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|l l l}
+    \begin{tabular}{l l|r r}
         \toprule[1pt]
-        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 0.174 \\
+        & High State & 3.3 & 3.16 \\
         \midrule[1pt]
-        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 0.182 \\
+        & High State & 3.3 & 3.174 \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Crosstalk measurements for side-by-side stripline.}
     \label{tab:meas-side-by-side-stripline}
 \end{table}
 
+\newpage
+
 \subsection{Task 2.3 - Crosstalk broadside stripline}
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|l l l}
+    \begin{tabular}{l l|r r}
         \toprule[1pt]
-        \textbf{NEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 0.219 \\
+        & High State & 3.3 & 3.11 \\
         \midrule[1pt]
-        \textbf{FEXT} & State & Steady State Level [mV] & Critical Level [mV] \\
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
         \midrule
-        Low State & & & \\
-        High State & & & \\
+        & Low State & 0 & 0.277 \\
+        & High State & 3.3 & 3.08 \\
         \bottomrule[1pt]
     \end{tabular}
     \caption{Crosstalk measurements for broadside stripline.}
@@ -73,5 +84,80 @@
 
 Reduce VCC by 25\% and measure crosstalk again.
 
+\solution
+
+The measured waveforms are shown in Figure \ref{fig:meas-waveforms2}, and the critical crosstalk levels are summarized in Tables \ref{tab:meas-side-by-side-microstrip2}, \ref{tab:meas-side-by-side-stripline2}, and \ref{tab:meas-broadside-stripline2}. We expect the critical levels to be lower when we lower the $V_{DD}$. The current flowing to the receiver (load) capacitor will be lower, hence the coupled inductors will induce a smaller current in the victim line.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{measured_245v.pdf}
+    \caption{Measured waveforms for the three transmission line configurations ($V_{DD} = 2.475\,\si{V}$).}
+    \label{fig:meas-waveforms2}
+\end{figure}
+
+\newpage
+
+\subsubsection{Crosstalk side-by-side microstrip}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.103 \\
+        & High State & 3.3 & 3.23 \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.168 \\
+        & High State & 3.3 & 3.20 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for side-by-side microstrip.}
+    \label{tab:meas-side-by-side-microstrip2}
+\end{table}
+
+\subsubsection{Crosstalk side-by-side stripline}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.0968 \\
+        & High State & 3.3 & 3.23 \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.134 \\
+        & High State & 3.3 & 3.19 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for side-by-side stripline.}
+    \label{tab:meas-side-by-side-stripline2}
+\end{table}
+
+\subsubsection{Crosstalk broadside stripline}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l l|r r}
+        \toprule[1pt]
+        \textbf{NEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.152 \\
+        & High State & 3.3 & 3.19 \\
+        \midrule[1pt]
+        \textbf{FEXT} & State & Steady State Level [V] & Critical Level [V] \\
+        \midrule
+        & Low State & 0 & 0.225 \\
+        & High State & 3.3 & 3.12 \\
+        \bottomrule[1pt]
+    \end{tabular}
+    \caption{Crosstalk measurements for broadside stripline.}
+    \label{tab:meas-broadside-stripline2}
+\end{table}
 
 \end{document}
